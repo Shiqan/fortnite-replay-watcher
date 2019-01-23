@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsService", "WindowsService\WindowsService.csproj", "{DDE74C10-CDD9-441D-83A0-E8D0FBFBA822}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3015C50-290C-4F52-86E3-294184933AE0} = {A3015C50-290C-4F52-86E3-294184933AE0}
+	EndProjectSection
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{81B5593B-3547-4AE7-9734-7A094CF0F502}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortniteReplayUploader", "FortniteReplayUploader\FortniteReplayUploader.csproj", "{A3015C50-290C-4F52-86E3-294184933AE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortniteReplayUploader.Tests", "FortniteReplayUploader.Tests\FortniteReplayUploader.Tests.csproj", "{3A91FBE7-84CA-4BD2-A37B-396E40C6B494}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDE74C10-CDD9-441D-83A0-E8D0FBFBA822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDE74C10-CDD9-441D-83A0-E8D0FBFBA822}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDE74C10-CDD9-441D-83A0-E8D0FBFBA822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDE74C10-CDD9-441D-83A0-E8D0FBFBA822}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81B5593B-3547-4AE7-9734-7A094CF0F502}.Debug|Any CPU.ActiveCfg = Debug
+		{81B5593B-3547-4AE7-9734-7A094CF0F502}.Release|Any CPU.ActiveCfg = Release
+		{A3015C50-290C-4F52-86E3-294184933AE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3015C50-290C-4F52-86E3-294184933AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3015C50-290C-4F52-86E3-294184933AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3015C50-290C-4F52-86E3-294184933AE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A91FBE7-84CA-4BD2-A37B-396E40C6B494}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A91FBE7-84CA-4BD2-A37B-396E40C6B494}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A91FBE7-84CA-4BD2-A37B-396E40C6B494}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A91FBE7-84CA-4BD2-A37B-396E40C6B494}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CBD8FD6C-18EA-4633-923B-A9FFE9759928}
+	EndGlobalSection
+EndGlobal
