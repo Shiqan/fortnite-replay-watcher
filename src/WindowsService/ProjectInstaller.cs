@@ -13,13 +13,18 @@ namespace FortniteReplayWatcher
 
         public MyProjectInstaller()
         {
-            _serviceProcessInstaller = new ServiceProcessInstaller();
-            _serviceProcessInstaller.Account = ServiceAccount.User;
+            _serviceProcessInstaller = new ServiceProcessInstaller
+            {
+                Account = ServiceAccount.User
+            };
+
             _serviceInstaller = new ServiceInstaller
             {
                 ServiceName = "FortniteReplayWatcher",
                 DisplayName = "FortniteReplayWatcher",
-                Description = "Automagically upload your Fortnite replay files"
+                Description = "Automagically upload your Fortnite replay files",
+                StartType = ServiceStartMode.Automatic,
+                DelayedAutoStart = true
 
             };
 

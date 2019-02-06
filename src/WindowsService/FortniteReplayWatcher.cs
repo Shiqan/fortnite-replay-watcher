@@ -1,5 +1,4 @@
 ﻿using FortniteReplayUploader;
-using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -17,7 +16,7 @@ namespace FortniteReplayWatcher
 
         private MemoryCache _memCache;
         private CacheItemPolicy _cacheItemPolicy;
-        private const int CacheTimeMilliseconds = 600000; // 10 minutes
+        private const int CacheTimeMilliseconds = 60000; // 1 minute
 
         protected override void OnStart(string[] args)
         {
@@ -53,9 +52,7 @@ namespace FortniteReplayWatcher
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
             _cacheItemPolicy.AbsoluteExpiration = DateTimeOffset.Now.AddMilliseconds(CacheTimeMilliseconds);
-
-            // Only add if it is not there already
-            _memCache.AddOrGetExisting(e.Name, e, _cacheItemPolicy);
+            _memCache.Set(e.Name, e, _cacheItemPolicy);
         }
 
         // Handle cache item expiring
