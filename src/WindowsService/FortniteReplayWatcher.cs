@@ -1,4 +1,5 @@
 ﻿using FortniteReplayUploader;
+using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -12,11 +13,15 @@ namespace FortniteReplayWatcher
     {
         private FileSystemWatcher _watcher;
         private Settings _settings;
-        private UploadService _service;
+
+        private UploadService _uploadService;
+        private ParseService _parseService;
 
         private MemoryCache _memCache;
         private CacheItemPolicy _cacheItemPolicy;
-        private const int CacheTimeMilliseconds = 60000; // 1 minute
+
+        //private const int CacheTimeMilliseconds = 3000; // 3 seconds
+        private const int CacheTimeMilliseconds = 600000; // 10 minutes
 
         protected override void OnStart(string[] args)
         {
@@ -26,13 +31,15 @@ namespace FortniteReplayWatcher
                 Logger("No username provided...");
                 throw new NoUsernameException();
             }
-            _service = new UploadService(_settings.Endpoint);
+            _uploadService = new UploadService(_settings.Endpoint);
+            _parseService = new ParseService();
 
             _memCache = MemoryCache.Default;
             _cacheItemPolicy = new CacheItemPolicy()
             {
-                RemovedCallback = OnRemovedFromCache
+                //RemovedCallback = OnRemovedFromCache
             };
+
             
             _watcher = new FileSystemWatcher(_settings.Path, _settings.FileExtension)
             {
@@ -46,14 +53,49 @@ namespace FortniteReplayWatcher
         protected override void OnStop()
         {
             _watcher.EnableRaisingEvents = false;
+            _memCache.Dispose();
             _watcher.Dispose();
         }
 
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
             _cacheItemPolicy.AbsoluteExpiration = DateTimeOffset.Now.AddMilliseconds(CacheTimeMilliseconds);
+
+            string msg = $"Parsing file {e.FullPath} {e.ChangeType}";
+
+            var cache_offset = _memCache.Get($"offset_{e.Name}");
+            var offset = cache_offset == null ? 0 : Convert.ToInt32(cache_offset);
+            var new_offset = _parseService.Parse(_settings.Username, e.FullPath, offset);
+            new_offset = new_offset == null ? 0 : new_offset;
+            _memCache.Set($"offset_{e.Name}", new_offset, _cacheItemPolicy);
+
             _memCache.Set(e.Name, e, _cacheItemPolicy);
         }
+        
+        //private void OnRemovedFromCache2(CacheEntryRemovedArguments args)
+        //{
+        //    if (args.RemovedReason != CacheEntryRemovedReason.Expired) return;
+        //    var e = (FileSystemEventArgs)args.CacheItem.Value;
+
+        //    string msg = $"Parsing file {e.FullPath} {e.ChangeType}";
+        //    Logger(msg);
+
+        //    try
+        //    {
+        //        var cache_offset = _memCache.Get($"offset_{e.Name}");
+        //        var offset = cache_offset == null ? 0 : Convert.ToInt32(cache_offset);
+        //        var new_offset = _parseService.Parse(_settings.Username, e.FullPath, offset);
+        //        new_offset = new_offset == null ? 0 : new_offset;
+        //        _memCache.Set($"offset_{e.Name}", new_offset, DateTimeOffset.Now.AddMilliseconds(CacheTimeMilliseconds2));
+                
+        //        Logger($"Parse completed... {new_offset}");
+        //    }
+        //    catch (UploadException ex)
+        //    {
+        //        Logger(ex.Message, EventLogEntryType.Error);
+        //    }
+        //}
+
 
         // Handle cache item expiring
         private void OnRemovedFromCache(CacheEntryRemovedArguments args)
@@ -68,7 +110,7 @@ namespace FortniteReplayWatcher
 
             try
             {
-                var response = _service.Upload(_settings.Username, e.FullPath).Result;
+                var response = _uploadService.Upload(_settings.Username, e.FullPath).Result;
                 Logger(response);
                 Logger("Upload completed");
             }

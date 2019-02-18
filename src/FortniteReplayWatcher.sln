@@ -12,7 +12,7 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Inst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortniteReplayUploader", "FortniteReplayUploader\FortniteReplayUploader.csproj", "{A3015C50-290C-4F52-86E3-294184933AE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortniteReplayUploader.Tests", "FortniteReplayUploader.Tests\FortniteReplayUploader.Tests.csproj", "{3A91FBE7-84CA-4BD2-A37B-396E40C6B494}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FortniteReplayUploader.Tests", "FortniteReplayUploader.Tests\FortniteReplayUploader.Tests.csproj", "{3A91FBE7-84CA-4BD2-A37B-396E40C6B494}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

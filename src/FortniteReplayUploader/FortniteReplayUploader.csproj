@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FortniteReplayUploader</RootNamespace>
     <AssemblyName>FortniteReplayUploader</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,8 +32,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FortniteReplayObserver.File">
+      <HintPath>..\..\..\FortniteReplayReader\src\FortniteReplayObserver.File\obj\Debug\net461\FortniteReplayObserver.File.dll</HintPath>
+    </Reference>
+    <Reference Include="FortniteReplayObserver.Mqtt">
+      <HintPath>..\..\..\FortniteReplayReader\src\FortniteReplayObserver.Mqtt\bin\Debug\net461\FortniteReplayObserver.Mqtt.dll</HintPath>
+    </Reference>
+    <Reference Include="FortniteReplayReader">
+      <HintPath>..\..\..\FortniteReplayReader\src\FortniteReplayReader\bin\Debug\net461\FortniteReplayReader.dll</HintPath>
+    </Reference>
+    <Reference Include="FortniteReplayReader.Core">
+      <HintPath>..\..\..\FortniteReplayReader\src\FortniteReplayReader\bin\Debug\net461\FortniteReplayReader.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ParseService.cs" />
     <Compile Include="UploadService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
