@@ -44,6 +44,9 @@
     <Reference Include="FortniteReplayReader.Core">
       <HintPath>..\..\..\FortniteReplayReader\src\FortniteReplayReader\bin\Debug\net461\FortniteReplayReader.Core.dll</HintPath>
     </Reference>
+    <Reference Include="FortniteReplayReader.Observerable">
+      <HintPath>..\..\..\FortniteReplayReader\src\FortniteReplayReader.Observerable\bin\Debug\net461\FortniteReplayReader.Observerable.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Caching" />
