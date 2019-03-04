@@ -123,8 +123,6 @@ namespace FortniteReplayWatcher
         private Settings ReadJsonFile()
         {
             var path = Path.Combine(new string[] { Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "FortniteReplayWatcher", "settings.json" });
-            Logger($"applicationdata path: {Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}");
-            Logger($"GetFolderPath: {path}");
 
             Settings settings;
             if (File.Exists(path))

@@ -32,11 +32,11 @@ namespace FortniteReplayUploader
             {
                 using (var reader = new ElimObservableFortniteBinaryReader(stream, offset))
                 {
-                    var mqttObserver = new MqttObserver(cache);
-                    var fileObserver = new FileObserver(cache);
+                    //var mqttObserver = new MqttObserver(cache);
+                    //var fileObserver = new FileObserver(cache);
 
-                    mqttObserver.Subscribe(reader);
-                    fileObserver.Subscribe(reader);
+                    //mqttObserver.Subscribe(reader);
+                    //fileObserver.Subscribe(reader);
 
                     var replay = reader.ReadFile();
                     var addEliminationsToCache = replay.Eliminations.Concat(cache.Keys).ToDictionary(k => k, v => 1);
