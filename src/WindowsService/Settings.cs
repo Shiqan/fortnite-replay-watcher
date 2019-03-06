@@ -6,8 +6,8 @@ namespace FortniteReplayWatcher
     public class Settings
     {
         public string Username { get; set; }
-        public string Path { get; set; } = System.IO.Path.Combine(new string[] { Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FortniteGame", "Saved", "Demos" });
+        public string Path { get; set; }
         public string FileExtension { get; set; } = "*.replay";
-        public string Endpoint { get; set; } = "http://fortnite-replay-api.herokuapp.com/replays/upload";
+        public string Endpoint { get; set; } = "https://fortnite-replay-api.herokuapp.com/replays/upload";
     }
 }
