@@ -8,17 +8,14 @@ namespace FortniteReplayWatcher
     [RunInstaller(true)]
     public class MyProjectInstaller : Installer
     {
-        private readonly ServiceProcessInstaller _serviceProcessInstaller;
-        private readonly ServiceInstaller _serviceInstaller;
-
         public MyProjectInstaller()
         {
-            _serviceProcessInstaller = new ServiceProcessInstaller
+            var serviceProcessInstaller = new ServiceProcessInstaller
             {
-                Account = ServiceAccount.User,
+                Account = ServiceAccount.LocalSystem
             };
 
-            _serviceInstaller = new ServiceInstaller
+            var serviceInstaller = new ServiceInstaller
             {
                 ServiceName = "FortniteReplayWatcher",
                 DisplayName = "FortniteReplayWatcher",
@@ -28,7 +25,7 @@ namespace FortniteReplayWatcher
             };
 
             Installers.AddRange(new Installer[] {
-                _serviceProcessInstaller, _serviceInstaller
+                serviceProcessInstaller, serviceInstaller
             });
         }
 

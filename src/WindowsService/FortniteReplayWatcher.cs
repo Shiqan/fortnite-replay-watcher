@@ -19,9 +19,7 @@ namespace FortniteReplayWatcher
 
         private MemoryCache _memCache;
         private CacheItemPolicy _cacheItemPolicy;
-
-        //private const int CacheTimeMilliseconds = 3000; // 3 seconds
-        private const int CacheTimeMilliseconds = 600000; // 10 minutes
+        private const int CacheTimeMilliseconds = 300000; // 5 minutes
 
         protected override void OnStart(string[] args)
         {
@@ -37,10 +35,11 @@ namespace FortniteReplayWatcher
             _memCache = MemoryCache.Default;
             _cacheItemPolicy = new CacheItemPolicy()
             {
-                //RemovedCallback = OnRemovedFromCache
+                RemovedCallback = OnRemovedFromCache,
+                SlidingExpiration = TimeSpan.FromMilliseconds(CacheTimeMilliseconds)
             };
 
-            
+
             _watcher = new FileSystemWatcher(_settings.Path, _settings.FileExtension)
             {
                 NotifyFilter = NotifyFilters.LastWrite
@@ -59,43 +58,17 @@ namespace FortniteReplayWatcher
 
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
-            _cacheItemPolicy.AbsoluteExpiration = DateTimeOffset.Now.AddMilliseconds(CacheTimeMilliseconds);
-
-            string msg = $"Parsing file {e.FullPath} {e.ChangeType}";
+            var msg = $"Parsing file {e.FullPath} {e.ChangeType}";
 
             var cache_offset = _memCache.Get($"offset_{e.Name}");
             var offset = cache_offset == null ? 0 : Convert.ToInt32(cache_offset);
+
             var new_offset = _parseService.Parse(_settings.Username, e.FullPath, offset);
             new_offset = new_offset == null ? 0 : new_offset;
-            _memCache.Set($"offset_{e.Name}", new_offset, _cacheItemPolicy);
 
+            _memCache.Set($"offset_{e.Name}", new_offset, new CacheItemPolicy { AbsoluteExpiration = DateTimeOffset.Now.AddMilliseconds(CacheTimeMilliseconds) });
             _memCache.Set(e.Name, e, _cacheItemPolicy);
         }
-        
-        //private void OnRemovedFromCache2(CacheEntryRemovedArguments args)
-        //{
-        //    if (args.RemovedReason != CacheEntryRemovedReason.Expired) return;
-        //    var e = (FileSystemEventArgs)args.CacheItem.Value;
-
-        //    string msg = $"Parsing file {e.FullPath} {e.ChangeType}";
-        //    Logger(msg);
-
-        //    try
-        //    {
-        //        var cache_offset = _memCache.Get($"offset_{e.Name}");
-        //        var offset = cache_offset == null ? 0 : Convert.ToInt32(cache_offset);
-        //        var new_offset = _parseService.Parse(_settings.Username, e.FullPath, offset);
-        //        new_offset = new_offset == null ? 0 : new_offset;
-        //        _memCache.Set($"offset_{e.Name}", new_offset, DateTimeOffset.Now.AddMilliseconds(CacheTimeMilliseconds2));
-                
-        //        Logger($"Parse completed... {new_offset}");
-        //    }
-        //    catch (UploadException ex)
-        //    {
-        //        Logger(ex.Message, EventLogEntryType.Error);
-        //    }
-        //}
-
 
         // Handle cache item expiring
         private void OnRemovedFromCache(CacheEntryRemovedArguments args)
@@ -105,7 +78,7 @@ namespace FortniteReplayWatcher
             // Now actually handle file event
             var e = (FileSystemEventArgs)args.CacheItem.Value;
 
-            string msg = $"Uploading file {e.FullPath} {e.ChangeType}";
+            var msg = $"Uploading file {e.FullPath} {e.ChangeType}";
             Logger(msg);
 
             try
@@ -122,7 +95,7 @@ namespace FortniteReplayWatcher
 
         private Settings ReadJsonFile()
         {
-            var path = Path.Combine(new string[] { Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "FortniteReplayWatcher", "settings.json" });
+            var path = Path.Combine(new string[] { AppDomain.CurrentDomain.BaseDirectory, "settings.json" });
 
             Settings settings;
             if (File.Exists(path))
@@ -141,7 +114,7 @@ namespace FortniteReplayWatcher
             }
             else
             {
-                Logger("config file doesnt exists", EventLogEntryType.Error);
+                Logger($"No config file found at {path}", EventLogEntryType.Error);
                 settings = new Settings();
             }
 
@@ -155,7 +128,7 @@ namespace FortniteReplayWatcher
 
         private void Logger(string msg, EventLogEntryType type)
         {
-            DateTime dt = new DateTime();
+            var dt = new DateTime();
             dt = System.DateTime.UtcNow;
             msg = dt.ToLocalTime() + ": " + msg;
             EventLog.WriteEntry("FortniteReplayWatcher", msg, type);
