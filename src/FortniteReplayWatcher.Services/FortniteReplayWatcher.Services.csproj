@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="FortniteReplayReader">
+      <HintPath>..\..\..\FortniteReplayReader\src\FortniteReplayReader\bin\Debug\netcoreapp3.0\FortniteReplayReader.dll</HintPath>
+    </Reference>
+    <Reference Include="FortniteReplayReader.Core">
+      <HintPath>..\..\..\FortniteReplayReader\src\FortniteReplayReader.Core\bin\Debug\netcoreapp3.0\FortniteReplayReader.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FortniteReplayReader.Observable">
+      <HintPath>..\..\..\FortniteReplayReader\src\FortniteReplayReader.Observable\bin\Debug\netcoreapp3.0\FortniteReplayReader.Observable.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

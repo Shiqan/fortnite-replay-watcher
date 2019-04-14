@@ -1,18 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.136
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsService", "WindowsService\WindowsService.csproj", "{DDE74C10-CDD9-441D-83A0-E8D0FBFBA822}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A3015C50-290C-4F52-86E3-294184933AE0} = {A3015C50-290C-4F52-86E3-294184933AE0}
-	EndProjectSection
-EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{81B5593B-3547-4AE7-9734-7A094CF0F502}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortniteReplayUploader", "FortniteReplayUploader\FortniteReplayUploader.csproj", "{A3015C50-290C-4F52-86E3-294184933AE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortniteReplayWatcher.Services", "FortniteReplayWatcher.Services\FortniteReplayWatcher.Services.csproj", "{EF591373-C077-4F1E-BA65-7467667D76BA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FortniteReplayUploader.Tests", "FortniteReplayUploader.Tests\FortniteReplayUploader.Tests.csproj", "{3A91FBE7-84CA-4BD2-A37B-396E40C6B494}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortniteReplayWatcher.Services.Test", "FortniteReplayWatcher.Services.Test\FortniteReplayWatcher.Services.Test.csproj", "{586CAEF2-F096-47AD-9603-D1036E8F5EEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortniteReplayWatcher.Worker", "FortniteReplayWatcher.Worker\FortniteReplayWatcher.Worker.csproj", "{4C3D07B5-05B1-4894-BF6B-D9C6D04C789D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +31,18 @@ Global
 		{3A91FBE7-84CA-4BD2-A37B-396E40C6B494}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A91FBE7-84CA-4BD2-A37B-396E40C6B494}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A91FBE7-84CA-4BD2-A37B-396E40C6B494}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF591373-C077-4F1E-BA65-7467667D76BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF591373-C077-4F1E-BA65-7467667D76BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF591373-C077-4F1E-BA65-7467667D76BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF591373-C077-4F1E-BA65-7467667D76BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{586CAEF2-F096-47AD-9603-D1036E8F5EEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{586CAEF2-F096-47AD-9603-D1036E8F5EEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{586CAEF2-F096-47AD-9603-D1036E8F5EEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{586CAEF2-F096-47AD-9603-D1036E8F5EEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C3D07B5-05B1-4894-BF6B-D9C6D04C789D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C3D07B5-05B1-4894-BF6B-D9C6D04C789D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C3D07B5-05B1-4894-BF6B-D9C6D04C789D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C3D07B5-05B1-4894-BF6B-D9C6D04C789D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
